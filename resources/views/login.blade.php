@@ -4,7 +4,24 @@
             Registre-se
         </a>
     </x-slot:btn>
-    tela de login
+    <section id="task_section">
+        <h1>Faça Login</h1>
 
-    <a href="{{route('home')}}">Início</a>
+        @if ($errors->any())
+            <ul class="alert-error">
+                @foreach($errors->all() as $error)
+                    <li>{{$error}}</li>
+                @endforeach
+
+            </ul>
+        @endif
+        <form method="POST" action="{{route('user.login_action')}}">
+            @csrf
+            <x-form.text_input type="email" name="email" label="E-mail:" placeholder="Digite seu e-mail:" required="required" />
+            <x-form.text_input type="password" name="password" label="Senha:" placeholder="Digite sua senha" required="required" />
+
+            <x-form.form_btn resetTxt="Limpar" submitTxt="Entrar" />
+
+        </form>
+    </section>
 </x-layout>

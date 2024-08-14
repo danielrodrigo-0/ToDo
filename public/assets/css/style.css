@@ -46,6 +46,8 @@ nav{
     padding: 20px 30px;
     border-radius: 10px;
     transition: all .3s ease-in-out;
+    border: 0;
+    cursor: pointer;
 }
 .btn:hover{
     transform: scale(1.05);
@@ -177,3 +179,48 @@ h2{
     border-radius: 50%;
     margin-right: 10px;
 }
+#task_section{
+    margin: auto;
+    padding-top: 20px;
+}
+#task_section>h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.inputArea{
+    display: block;
+    margin: 10px 0 20px 0;
+}
+.inputArea>label{
+    display: block;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+.inputArea>input, .inputArea>select{
+    height: 30px;
+    width: 400px;
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+.inputArea>input[type="checkbox"]{
+    height: 15px;
+    width: 13px;
+    display: flex;
+}
+.inputArea>textarea{
+    height: 120px;
+    width: 400px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+.user{
+    justify-self: left !important;
+}
+/* .content{
+    background-color: #f7f7f7
+} */
+

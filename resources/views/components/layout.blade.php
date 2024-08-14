@@ -16,7 +16,7 @@
         <div class="sidebar">
             <img src="/assets/images/logo.png" alt="Logo"/>
         </div>
-        <div clss="content">
+        <div class="content">
             <nav>
                 {{$btn ?? null}}
             </nav>
