@@ -15,7 +15,7 @@
                 <a href="{{route('home', ['date' => $date_prev_button])}}">
                     <img src="assets/images/icon-prev.png" alt="icon-prev" />
                 </a>
-                {{$date_as_string}}
+                <x-form.text_input type="date" name="date_as_string" onfocus="onfocus=this.showPicker()" value="{{$date_as_string}}" onchange="dateVerif(this)" />
                 <a href="{{route('home', ['date' => $date_next_button])}}">
                     <img src="assets/images/icon-next.png" alt="icon-next"/>
                 </a>
@@ -32,8 +32,10 @@
     </section>
     <section class="list">
         <div class="list_header">
-            <select class="list_header-select">
-                <option value="1"> Todas as tarefas </option>
+            <select class="list_header-select" onchange="changeTaskStatusFilter(this)">
+                <option value="all_task"> Todas as tarefas </option>
+                <option value="task_pending"> Tarefas pendentes </option>
+                <option value="task_done"> Tarefas realizadas </option>
             </select>
         </div>
         <div class="task_list">
@@ -42,8 +44,48 @@
                 <x-task :data=$task/>
             @endforeach
 
+            <div class="navigation">
+                {!! $tasks->links() !!}
+            </div>
+
         </div>
     </section>
+
+    <script>
+
+        async function dateVerif(e){
+            // let dataAtual = {!! json_encode($date_as_string) !!};
+            let dataAtualizada = e.value;
+            // alert(dataAtual);
+            // alert(dataAtualizada);
+
+            let url = '{{route('home')}}/?date=' + dataAtualizada;
+            document.location.href=url;
+        }
+
+        function changeTaskStatusFilter(e){
+            // alert(e.value);
+            if(e.value == 'task_pending'){
+                showAllTasks();
+                document.querySelectorAll('.task_done').forEach(function(element){
+                    element.style.display = 'none';
+                });
+            }else if(e.value == 'task_done'){
+                showAllTasks()
+                document.querySelectorAll('.task_pending').forEach(function(element){
+                    element.style.display = 'none';
+                });
+            }else{
+                showAllTasks();
+            }
+        }
+
+        function showAllTasks(){
+            document.querySelectorAll('.task').forEach(function(element){
+                element.style.display = 'flex';
+            });
+        }
+    </script>
 
    <script>
        async function taskUpdate(element){
@@ -51,6 +93,7 @@
            let taskId = element.dataset.id;
 
            let url = '{{route('task.update')}}';
+
            let rawResult = await fetch(url, {
                method: 'POST',
                headers: {

@@ -1,4 +1,4 @@
-<x-layout page="Todo Login">
+<x-layout page="Todo Edit">
     <x-slot:btn>
         <a href="{{route('home')}}" class="btn btn-primary">
             Voltar

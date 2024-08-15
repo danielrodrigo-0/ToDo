@@ -11,21 +11,28 @@ class HomeController extends Controller
 {
     //
     public function index(Request $r){
+// dd($r);
+        $carbonDate = new Carbon;
+        $data['date_as_string'] = "";
+        $data['date_prev_button'] = "";
+        $data['date_next_button'] = "";
 
         if($r->date){
             $filteredDate = $r->date;
+
+            $carbonDate = Carbon::createFromDate($filteredDate);
+
+            $data['date_as_string'] = $carbonDate->format('Y-m-d');
+            $data['date_prev_button'] = $carbonDate->addDay(-1)->format('Y-m-d');
+            $data['date_next_button'] = $carbonDate->addDay(2)->format('Y-m-d');
+            // busca baseado na data
+            $data['tasks'] = Task::whereDate('due_date', $filteredDate)->get();
         }else{
-            $filteredDate = date('Y-m-d');
+            $data['tasks'] = Task::simplePaginate(5);
         }
-
-        $carbonDate = Carbon::createFromDate($filteredDate);
-
-        $data['date_as_string'] = $carbonDate->translatedFormat('d') . ' de ' . ucfirst($carbonDate->translatedFormat('M'));
-        $data['date_prev_button'] = $carbonDate->addDay(-1)->format('Y-m');
-        $data['date_next_button'] = $carbonDate->addDay(2)->format('Y-m-d');
+        // dd($data['tasks']);
 
         // $tasks = Task::whereDate('due_date', date('Y-m-d'))->take(4);
-        $data['tasks'] = Task::whereDate('due_date', $filteredDate)->get();
 
         $data['AuthUser'] = Auth::user();
 

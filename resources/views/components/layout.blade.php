@@ -17,7 +17,7 @@
             <img src="/assets/images/logo.png" alt="Logo"/>
         </div>
         <div class="content">
-            <nav>
+            <nav >
                 {{$btn ?? null}}
             </nav>
             <main>

@@ -1,4 +1,5 @@
 {{-- {{dd(($onclick . 1))}} --}}
+{{-- @dd($onchange) --}}
 <div class="inputArea">
     <label for="{{$name}}"> {{$label ?? ''}} </label>
     <input type="{{empty($type) ? 'text' : $type}}"
@@ -6,6 +7,7 @@
     placeholder="{{$placeholder ?? ''}}"
      {{empty($required) ? '': 'required'}}
      value="{{$value ?? ''}}"
-     {{((!empty($type)) && $type == 'dateTime-local') ? $onfocus : ''}}
+     onchange="{{!empty($onchange) ? $onchange : ''}}"
+     onfocus="{{((!empty($type)) && ($type == 'dateTime-local' || $type == 'date')) ? $onfocus : ''}}"
      />
 </div>

@@ -42,7 +42,7 @@ class AuthController extends Controller
             'password' => 'required|min:6'
         ]);
         if(Auth::attempt($validator)){
-        return redirect()->route('home');
+            return redirect()->route('home');
         }
     }
 

@@ -41,6 +41,15 @@ nav{
     justify-content: flex-end;
     padding-right: 20px;
 }
+.navigation>*{
+    display: flex;
+    justify-content: center;
+}
+.navigation>nav{
+    height: 100px;
+    display: flex;
+    width: 100%;
+}
 
 .btn{
     padding: 20px 30px;
@@ -208,6 +217,10 @@ h2{
     height: 15px;
     width: 13px;
     display: flex;
+}
+.inputArea>input[type="date"]{
+    /* display: flex; */
+    width: 100%;
 }
 .inputArea>textarea{
     height: 120px;
