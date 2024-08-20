@@ -53,7 +53,7 @@ class TaskController extends Controller
         return redirect(route('home'));
     }
     public function delete(Request $r){
-        //delete e volta pra home
+        //deleta e volta pra home
         $id = $r->id;
         $task = Task::find($id);
 
