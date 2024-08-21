@@ -55,35 +55,79 @@
             </div>
         </div>
         <div class="graph_header-subtitle">Tarefas <b>{{ $tasks_count - $undone_tasks_count }}/{{ $tasks_count }}</b></div>
-        <div class="graph_placeholder">
+        <div id="radial-chart" class="graph_placeholder">
             <script>
-                $(document).ready(function() {
-                    function renderChart(tasks_count, undone_tasks_count) {
-                        console.log(tasks_count);
-                        console.log(undone_tasks_count);
-                        var options = {
-                            series: [70],
-                            chart: {
-                                height: 350,
-                                type: 'radialBar',
+                let done = @json($tasks_count - $undone_tasks_count);
+                let todo = @json($undone_tasks_count);
+                let total = @json($tasks_count);
+                done = (done / total) * 100;
+                todo = (todo / total) * 100;
+                // alert(done);
+                const getChartOptions = () => {
+                    return {
+                        series: [Math.round(todo), Math.round(done)],
+                        colors: ["#6143FF", "#1C64F2"],
+                        chart: {
+                            height: "380px",
+                            width: "100%",
+                            type: "radialBar",
+                            sparkline: {
+                                enabled: true,
                             },
-                            plotOptions: {
-                                radialBar: {
-                                    hollow: {
-                                        size: '70%',
-                                    }
+                        },
+                        plotOptions: {
+                            radialBar: {
+                                track: {
+                                    background: '#E5E7EB',
                                 },
+                                dataLabels: {
+                                    show: true,
+                                },
+                                hollow: {
+                                    margin: 0,
+                                    size: "50%",
+                                }
                             },
-                            labels: ['Cricket'],
-                        };
-
-                        var chart = new ApexCharts(document.querySelector("#chart"), options);
-                        chart.render();
+                        },
+                        grid: {
+                            show: false,
+                            strokeDashArray: 4,
+                            padding: {
+                                left: 2,
+                                right: 2,
+                                top: -23,
+                                bottom: -20,
+                            },
+                        },
+                        labels: ["Pendentes",  "Realizadas"],
+                        legend: {
+                            show: true,
+                            position: "bottom",
+                            fontFamily: "Inter, sans-serif",
+                        },
+                        tooltip: {
+                            enabled: true,
+                            x: {
+                                show: false,
+                            },
+                        },
+                        yaxis: {
+                            show: false,
+                            labels: {
+                                formatter: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
                     }
-                });
+                }
 
-                // renderChart({{ $tasks_count }}, {{ $undone_tasks_count }});
+                if (document.getElementById("radial-chart") && typeof ApexCharts !== 'undefined') {
+                    const chart = new ApexCharts(document.querySelector("#radial-chart"), getChartOptions());
+                    chart.render();
+                }
             </script>
+            {{-- renderChart({{ $tasks_count }}, {{ $undone_tasks_count }}); --}}
         </div>
         <div class="tasks_left_footer">
             <img src="assets/images/icon-info.png" alt="icon-info" />

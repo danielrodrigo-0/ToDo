@@ -11,7 +11,8 @@ class HomeController extends Controller
 {
     //
     public function index(Request $r){
-// dd($r);
+        // dd(Auth::user());
+        $user_id = Auth::user()->id;
         $carbonDate = new Carbon;
         $data['date_as_string'] = "";
         $data['date_prev_button'] = "";
@@ -23,7 +24,7 @@ class HomeController extends Controller
 
         if($r->date){
             $filteredDate = $r->date;
-            $taskData = Task::whereDate('due_date', $filteredDate);
+            $taskData = Task::where('user_id', $user_id)->whereDate('due_date', $filteredDate);
 
             $carbonDate = Carbon::createFromDate($filteredDate);
 
@@ -39,21 +40,21 @@ class HomeController extends Controller
                 $data['tasks_done'] = $taskData->where('is_done', 1)->Paginate(5);
             }
 
-            $data['undone_tasks_count'] = Task::whereDate('due_date', $filteredDate)->where('is_done', false)->count();
+            $data['undone_tasks_count'] = Task::where('user_id', $user_id)->whereDate('due_date', $filteredDate)->where('is_done', false)->count();
             $data['tasks_count'] = $data['tasks']->total();
         }else{
             $data['filter'] = $r->filter;
-            $data['tasks'] = Task::Paginate(5);
+            $data['tasks'] = Task::where('user_id', $user_id)->Paginate(5);
             // dd($data['tasks']);
-            $data['undone_tasks_count'] = Task::where('is_done', false)->count();
+            $data['undone_tasks_count'] = Task::where('user_id', $user_id)->where('is_done', false)->count();
             // dd($data['undone_tasks_count']);
             $data['tasks_count'] = $data['tasks']->total();
             // dd($data['tasks']);
 
             if($r->filter == "task_pending"){
-                $data['tasks_pending'] = Task::where('is_done', 0)->Paginate(5);
+                $data['tasks_pending'] = Task::where('user_id', $user_id)->where('is_done', 0)->Paginate(5);
             }elseif($r->filter == "task_done"){
-                $data['tasks_done'] = Task::where('is_done', 1)->Paginate(5);
+                $data['tasks_done'] = Task::where('user_id', $user_id)->where('is_done', 1)->Paginate(5);
             }
         }
 

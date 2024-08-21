@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Task;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -14,15 +15,17 @@ class TaskController extends Controller
     }
 
     public function create(Request $r){
+        // dd(Auth::user()->id);
         $categories = Category::all();
         $data['categories'] = $categories;
 
         return view('tasks.create', $data);
     }
     public function create_action(Request $r){
+        $user_id = Auth::user()->id;
         $task = $r->only(['title', 'category_id', 'description', 'due_date']);
 
-        $task['user_id'] = 1;
+        $task['user_id'] = $user_id;
         $dbTask = Task::create($task);
         return redirect(route('home'));
     }
