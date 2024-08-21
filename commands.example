@@ -1,0 +1,49 @@
+docker run -it -v "$(pwd):/var/www/html" -p 8000:8000 --name todo --rm imagemgeral bash
+- cria e executa imagem na porta especificada, nome e nome da imagem
+
+php artisan serve --host 0.0.0.0
+- executa o servidor do projeto
+
+git remote add origin link-do-repositorio
+-
+
+git log
+- exibe informações das branchs do projeto
+
+git status
+- exibe as alterações feitas no projeto e se estão adicionadas para push
+
+git checkout -b nome-branch
+- cria uma nova branch e já muda para ela
+
+git add .
+- adiciona todas alterações para stage
+
+git commit -m "descrição"
+- faz a commit com a descrição
+
+git push -u origin origem-branch
+- envia a commit para a origin especificada
+
+chmod -R 777
+- fornece permissão para alterar/gravar arquivos
+
+sudo chown -R ./projeto
+- muda o proprietário da pasta
+
+sudo chown -R usuario:usuario ./projeto
+
+ls -la
+- lista projetos e proprietários
+
+composer create-project laravel/laravel nome-projeto
+- cria um projeto laravel com o nome especificado
+
+php artisan make:seeder nomeSeeder
+- cria seeder para o projeto
+
+php artisan db:seed
+- executa os seeders
+
+php artisan make:factory NomeFactory
+- cria factory
