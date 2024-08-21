@@ -68,7 +68,7 @@
                         series: [Math.round(todo), Math.round(done)],
                         colors: ["#6143FF", "#1C64F2"],
                         chart: {
-                            height: "380px",
+                            height: "430px",
                             width: "100%",
                             type: "radialBar",
                             sparkline: {
@@ -103,7 +103,7 @@
                         legend: {
                             show: true,
                             position: "bottom",
-                            fontFamily: "Inter, sans-serif",
+                            fontFamily: "Rubik, Inter, sans-serif",
                         },
                         tooltip: {
                             enabled: true,
@@ -127,7 +127,6 @@
                     chart.render();
                 }
             </script>
-            {{-- renderChart({{ $tasks_count }}, {{ $undone_tasks_count }}); --}}
         </div>
         <div class="tasks_left_footer">
             <img src="assets/images/icon-info.png" alt="icon-info" />
@@ -171,7 +170,6 @@
 
     <script>
         async function dateVerif(e) {
-            // let dataAtual = {!! json_encode($date_as_string) !!};
             let dataAtualizada = e.value;
 
             let url = '{{ route('home') }}/?date=' + dataAtualizada;

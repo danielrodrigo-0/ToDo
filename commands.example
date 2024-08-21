@@ -47,3 +47,7 @@ php artisan db:seed
 
 php artisan make:factory NomeFactory
 - cria factory
+
+git checkout <the branch you want to merge into>
+
+git merge <the branch you want contents from>
