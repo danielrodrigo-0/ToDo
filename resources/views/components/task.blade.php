@@ -1,4 +1,6 @@
+<div class="fixed inset-0 bg-gray-900-70">
 <div class="task {{$data['is_done'] ? 'task_done' : 'task_pending'}}">
+
     <div class="title">
         <input type="checkbox" onchange="taskUpdate(this)" data-id="{{$data['id']}}"
         @if($data && $data['is_done'])
@@ -19,4 +21,5 @@
             <img src="assets/images/icon-delete.png" alt="icon-delete"/>
         </a>
     </div>
+</div>
 </div>

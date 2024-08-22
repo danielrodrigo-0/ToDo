@@ -1,3 +1,6 @@
+{{-- <link href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"></link>
+<link href="{{ asset('bootstrap/dist/css/bootstrap-utilities.css') }}" rel="stylesheet"></link>
+<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script> --}}
 <script>
     function changeTaskStatusFilter(e) {
         // Cria um objeto URL para manipular a URL atual
@@ -29,20 +32,20 @@
 
     // Define o filtro inicial quando a página é carregada
     window.onload = setInitialFilter;
-</script>
+    </script>
 <x-layout>
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <x-slot:btn>
-        <a href="{{ route('task.create') }}" class="btn btn-primary">
-            Criar tarefa
-        </a>
-        <a href="{{ route('logout') }}" class="btn btn-primary">
-            Sair
-        </a>
-    </x-slot:btn>
-    <section class="graph">
-        <div class="graph_header">
+        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <x-slot:btn>
+            <a href="{{ route('task.create') }}" class="btn btn-primary">
+                Criar tarefa
+            </a>
+            <a href="{{ route('logout') }}" class="btn btn-primary">
+                Sair
+            </a>
+        </x-slot:btn>
+        <section class="graph">
+            <div class="graph_header">
             <h2> Progresso do dia </h2>
             <div class="graph_header_line"></div>
             <div class="graph_header-date">

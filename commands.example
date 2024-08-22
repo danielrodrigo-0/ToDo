@@ -51,3 +51,6 @@ php artisan make:factory NomeFactory
 git checkout <the branch you want to merge into>
 
 git merge <the branch you want contents from>
+
+git branch -d "branch name"
+-deleta branch localmente
