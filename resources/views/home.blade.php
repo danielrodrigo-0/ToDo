@@ -6,6 +6,7 @@
 
         // Atualiza ou adiciona o parâmetro de filtro
         params.set('filter', e.value);
+        params.set('page', 1);
 
         // Define a URL atualizada
         const newUrl = url.origin + url.pathname + '?' + params.toString();
@@ -62,7 +63,6 @@
                 let total = @json($tasks_count);
                 done = (done / total) * 100;
                 todo = (todo / total) * 100;
-                // alert(done);
                 const getChartOptions = () => {
                     return {
                         series: [Math.round(todo), Math.round(done)],
@@ -81,11 +81,31 @@
                                     background: '#E5E7EB',
                                 },
                                 dataLabels: {
-                                    show: true,
+                                    show: true, //Habilita exibição dos data labels
+                                    name: { //Configura o estilo e visibilidade do nome (opcional)
+                                        offsetY: 0,
+                                        show: true,
+                                    },
+                                    value: { //Define o formato e a visibilidade do valor percentual mostrado no centro.
+                                        formatter: function(val) {
+                                            return val + '%';
+                                        },
+                                        show: true,
+                                    },
+                                    total: { //Exibe um texto personalizado no centro do gráfico, incluindo informações como o total de tarefas.
+                                        show: true,
+                                        label: 'Total',
+                                        formatter: function() {
+                                            return total;
+                                        },
+                                        color: '#0a0040',
+                                        fontSize: '18px',
+                                    },
                                 },
                                 hollow: {
                                     margin: 0,
                                     size: "50%",
+                                    background: '#fff', // Background color of the hollow area
                                 }
                             },
                         },
@@ -99,7 +119,7 @@
                                 bottom: -20,
                             },
                         },
-                        labels: ["Pendentes",  "Realizadas"],
+                        labels: ["Pendentes", "Realizadas"],
                         legend: {
                             show: true,
                             position: "bottom",
