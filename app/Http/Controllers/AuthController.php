@@ -44,6 +44,7 @@ class AuthController extends Controller
         if(Auth::attempt($validator)){
             return redirect()->route('home');
         }
+        return redirect()->back()->withErrors('Usuário ou senha incorreta(o).');
     }
 
     public function logout(){

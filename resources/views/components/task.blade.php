@@ -1,4 +1,3 @@
-<div class="fixed inset-0 bg-gray-900-70">
 <div class="task {{$data['is_done'] ? 'task_done' : 'task_pending'}}">
 
     <div class="title">
@@ -13,7 +12,7 @@
         <div class="sphere"></div>
         <div> {{$data['category']->title ?? ''}} </div>
     </div>
-    <div class="actions">
+    <div class="actions justify-content-end">
         <a href="{{route('task.edit', ['id' => $data['id']])}}">
             <img src="assets/images/icon-edit.png" alt="icon-edit"/>
         </a>
@@ -21,5 +20,4 @@
             <img src="assets/images/icon-delete.png" alt="icon-delete"/>
         </a>
     </div>
-</div>
 </div>

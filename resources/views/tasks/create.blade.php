@@ -5,8 +5,8 @@
         </a>
     </x-slot:btn>
 
-    <section id="task_section">
-        <h1>Criar tarefa</h1>
+    <section class="m-auto pt-3">
+        <h1 class="text-center mb-3">Criar tarefa</h1>
         <form method="POST" action="{{route('task.create_action')}}">
             @csrf
             <x-form.text_input name="title" label="Titulo da task" placeholder="Digite o titulo da tarefa" required="required" />

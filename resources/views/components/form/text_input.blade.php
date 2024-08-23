@@ -1,7 +1,9 @@
 {{-- {{dd(($onclick . 1))}} --}}
 {{-- @dd($onchange) --}}
-<div class="inputArea">
-    <label for="{{$name}}"> {{$label ?? ''}} </label>
+<div class="{{empty($class) ? 'inputArea' : $class}}">
+    @if($name)
+        <label for="{{$name}}"> {{$label ?? ''}} </label>
+    @endif
     <input type="{{empty($type) ? 'text' : $type}}"
     id="{{$name}}" name="{{$name}}"
     placeholder="{{$placeholder ?? ''}}"

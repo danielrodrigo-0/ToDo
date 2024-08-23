@@ -5,8 +5,8 @@
         </a>
     </x-slot:btn>
 
-    <section id="task_section">
-        <h1>Editar tarefa</h1>
+    <section id="task_section" class="m-auto pt-3">
+        <h1 class="text-center mb-3">Editar tarefa</h1>
         <form method="POST" action="{{route('task.edit_action')}}">
             @csrf
             <input type="hidden" name="id" value="{{$task->id}}" />

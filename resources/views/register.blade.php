@@ -4,8 +4,8 @@
             Já possui conta? Faça Login
         </a>
     </x-slot:btn>
-    <section id="task_section">
-        <h1>Registrar-se</h1>
+    <section class="m-auto pt-3">
+        <h1 class="text-center mb-3">Registrar-se</h1>
 
         @if ($errors->any())
             <ul class="alert-error">
@@ -19,7 +19,7 @@
             @csrf
             <x-form.text_input name="name" label="Nome:" placeholder="Digite seu nome" required="required" />
             <x-form.text_input type="email" name="email" label="E-mail:" placeholder="Digite seu e-mail:" required="required" />
-            <x-form.text_input type="password" name="password" label="Senha:" placeholder="Digite sua senha" required="required" />
+            <x-form.text_input type="password" name="password" label="Senha (min. 6 caracteres):" placeholder="Digite sua senha" required="required" />
             <x-form.text_input type="password" name="password_confirmation" label="Confirme sua senha:" placeholder="Confirma sua senha" required="required" />
 
             <x-form.form_btn resetTxt="Limpar" submitTxt="Registrar-se" />

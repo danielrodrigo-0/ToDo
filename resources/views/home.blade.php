@@ -32,34 +32,34 @@
 
     // Define o filtro inicial quando a página é carregada
     window.onload = setInitialFilter;
-    </script>
+</script>
 <x-layout>
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-        <x-slot:btn>
-            <a href="{{ route('task.create') }}" class="btn btn-primary">
-                Criar tarefa
-            </a>
-            <a href="{{ route('logout') }}" class="btn btn-primary">
-                Sair
-            </a>
-        </x-slot:btn>
-        <section class="graph">
-            <div class="graph_header">
-            <h2> Progresso do dia </h2>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <x-slot:btn>
+        <a href="{{ route('task.create') }}" class="btn btn-primary">
+            Criar tarefa
+        </a>
+        <a href="{{ route('logout') }}" class="btn btn-primary">
+            Sair
+        </a>
+    </x-slot:btn>
+    <section class="graph container-fluid px-3 pt-3 h-100 w-25">
+        <div class="graph_header d-flex justify-content-between align-items-center">
+            <h2 class="d-inline-block m-0" style="flex: 2; font-size: 18px;"> Progresso do dia </h2>
             <div class="graph_header_line"></div>
-            <div class="graph_header-date">
+            <div class="d-flex justify-content-center align-items-center mb-0" style="flex: 1; font-size: 10px;">
                 <a href="{{ route('home', ['date' => $date_prev_button]) }}">
                     <img src="assets/images/icon-prev.png" alt="icon-prev" />
                 </a>
-                <x-form.text_input type="date" name="date_as_string" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" onchange="dateVerif(this)" />
+                <x-form.text_input class="m-0" type="date" name="" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" onchange="dateVerif(this)" />
                 <a href="{{ route('home', ['date' => $date_next_button]) }}">
                     <img src="assets/images/icon-next.png" alt="icon-next" />
                 </a>
             </div>
         </div>
-        <div class="graph_header-subtitle">Tarefas <b>{{ $tasks_count - $undone_tasks_count }}/{{ $tasks_count }}</b></div>
-        <div id="radial-chart" class="graph_placeholder">
+        <div class="graph_header-subtitle" style="margin-top: 10px;">Tarefas <b>{{ $tasks_count - $undone_tasks_count }}/{{ $tasks_count }}</b></div>
+        <div id="radial-chart">
             <script>
                 let done = @json($tasks_count - $undone_tasks_count);
                 let todo = @json($undone_tasks_count);
@@ -151,23 +151,23 @@
                 }
             </script>
         </div>
-        <div class="tasks_left_footer">
+        <div class="tasks_left_footer d-flex flex-row align-items-center justify-content-center" style="margin-top: 50px;">
             <img src="assets/images/icon-info.png" alt="icon-info" />
             Restam {{ $undone_tasks_count }} tarefas para serem realizadas
         </div>
     </section>
-    <section class="list">
-        <div class="list_header">
-            <select id="task_filter" class="list_header-select" onchange="changeTaskStatusFilter(this)">
+    <section class="container-fluid px-3 pt-3" style="flex: 1;">
+        <div class="d-flex">
+            <select id="task_filter" class="list_header-select bg-transparent border-0" onchange="changeTaskStatusFilter(this)">
                 <option value="all_task"> Todas as tarefas </option>
                 <option value="task_pending"> Tarefas pendentes </option>
                 <option value="task_done"> Tarefas realizadas </option>
             </select>
         </div>
-        <div class="task_list">
+        <div class="d-flex flex-column w-100 mt-3">
             @if ($filter == 'task_pending')
                 @foreach ($tasks_pending as $pending)
-                    <x-task :data=$pending />
+                    <x-task :data=$pending />t
                 @endforeach
                 <div class="navigation">
                     {{ $tasks_pending->appends(request()->query())->links('') }}
