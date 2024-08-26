@@ -1,6 +1,3 @@
-{{-- <link href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"></link>
-<link href="{{ asset('bootstrap/dist/css/bootstrap-utilities.css') }}" rel="stylesheet"></link>
-<script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}"></script> --}}
 <script>
     function changeTaskStatusFilter(e) {
         // Cria um objeto URL para manipular a URL atual
@@ -52,7 +49,7 @@
                 <a href="{{ route('home', ['date' => $date_prev_button]) }}">
                     <img src="assets/images/icon-prev.png" alt="icon-prev" />
                 </a>
-                <x-form.text_input class="m-0" type="date" name="" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" onchange="dateVerif(this)" />
+                <x-form.text_input id="filterDate" class="m-0" type="date" name="" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" />
                 <a href="{{ route('home', ['date' => $date_next_button]) }}">
                     <img src="assets/images/icon-next.png" alt="icon-next" />
                 </a>
@@ -167,37 +164,76 @@
         <div class="d-flex flex-column w-100 mt-3">
             @if ($filter == 'task_pending')
                 @foreach ($tasks_pending as $pending)
-                    <x-task :data=$pending />t
+                    <x-task :data=$pending />
                 @endforeach
-                <div class="navigation">
-                    {{ $tasks_pending->appends(request()->query())->links('') }}
-                </div>
+                {{ $tasks_pending->appends(request()->query())->links('') }}
             @elseif($filter == 'task_done')
                 @foreach ($tasks_done as $done)
                     <x-task :data=$done />
                 @endforeach
-                <div class="navigation">
-                    {{ $tasks_done->appends(request()->query())->links('') }}
-                </div>
+                {{ $tasks_done->appends(request()->query())->links('') }}
             @else
                 @foreach ($tasks as $task)
                     <x-task :data=$task />
                 @endforeach
-                <div class="navigation">
-                    {{ $tasks->appends(request()->query())->links('') }}
-                </div>
+                {{ $tasks->appends(request()->query())->links('') }}
             @endif
 
         </div>
     </section>
 
     <script>
-        async function dateVerif(e) {
-            let dataAtualizada = e.value;
+        document.addEventListener("DOMContentLoaded", function() {
+            let urlBase = '{{ route('home') }}/?date=';
+            let typingTimer;
+            let doneTypingInterval = 4000;
 
-            let url = '{{ route('home') }}/?date=' + dataAtualizada;
-            document.location.href = url;
-        }
+            function isValidDate(dateString) {
+                // Verifica se a string está no formato yyyy-mm-dd e se é uma data válida
+                const regex = /^\d{4}-\d{2}-\d{2}$/;
+                if (!regex.test(dateString)) return false;
+
+                const date = new Date(dateString);
+                return date instanceof Date && !isNaN(date);
+            }
+
+            function redirectToDate(dateSet) {
+                if (dateSet && isValidDate(dateSet) && !document.target) {
+                    let url = urlBase + encodeURIComponent(dateSet);
+                    window.location.href = url; // Redireciona para a nova URL com a data
+                } else {
+                    window.location.href = '{{ route('home') }}'; // Redireciona para a URL padrão se a data não for válida
+                }
+            }
+
+            function doneTyping() {
+                redirectToDate(filterDate.value);
+            }
+
+            filterDate.addEventListener("keydown", function(e) {
+                if (e.keyCode === 13) {
+                    document.activeElement.blur();
+                    e.preventDefault(); // Previne o comportamento padrão do Enter
+                    doneTyping();
+                }
+            });
+
+            filterDate.addEventListener("focusout", function() {
+                clearTimeout(typingTimer);
+                if (filterDate.value) {
+                    doneTyping();
+                }
+            });
+
+            // async function filterDate(e) {
+            //     let dateSet = e.value;
+
+            //     if (dateSet != "") {
+            //         url = '{{ route('home') }}/?date=' + dateSet;
+            //     }
+            //     document.location.href = url;
+            // }
+        });
     </script>
     <script>
         async function taskUpdate(element) {

@@ -4,7 +4,11 @@
     @if($name)
         <label for="{{$name}}"> {{$label ?? ''}} </label>
     @endif
-    <input type="{{empty($type) ? 'text' : $type}}"
+    <input
+    @if($id)
+        id="{{$id}}"
+    @endif
+    type="{{empty($type) ? 'text' : $type}}"
     id="{{$name}}" name="{{$name}}"
     placeholder="{{$placeholder ?? ''}}"
      {{empty($required) ? '': 'required'}}

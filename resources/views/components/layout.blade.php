@@ -21,7 +21,7 @@
             <img src="/assets/images/logo.png" alt="Logo" class="mw-100"/>
         </div>
         <div class="content">
-            <nav class="d-flex align-items-center justify-content-end">
+            <nav class="d-flex align-items-center justify-content-end" style="height: 100px; width: calc(100vw - 100px); background-color: var(--background-light); padding-right: 20px;">
                 {{$btn ?? null}}
             </nav>
             <main class="d-flex p-0">

@@ -1,5 +1,6 @@
+<div class="d-flex justify-content-center w-100 flex-row" style="margin: 10px 10px 0 10px;">
 @if ($paginator->hasPages())
-    <nav role="navigation" aria-label="Pagination Navigation" class="flex justify-between">
+    <nav role="navigation" aria-label="Pagination Navigation" class="navigation flex justify-between">
         {{-- Previous Page Link --}}
         @if ($paginator->onFirstPage())
             <span
@@ -12,7 +13,6 @@
                 {!! __('pagination.previous') !!}
             </a>
         @endif
-        <div style="margin: 0 10px 0 10px">
             {{-- Pagination Elements --}}
             @foreach ($elements as $element)
                 {{-- "Three Dots" Separator --}}

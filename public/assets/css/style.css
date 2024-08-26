@@ -18,22 +18,6 @@
     background-color: var(--color-primary);
 }
 
-nav{
-    height: 100px;
-    width: calc(100vw - 100px);
-    background-color: var(--background-light);
-    padding-right: 20px;
-}
-
-.navigation>*{
-    display: flex;
-    justify-content: center;
-    height: 100px;
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-}
-
 .btn, .btn:hover{
     padding: 20px 30px;
     border-radius: 10px;
@@ -48,6 +32,10 @@ nav{
 a.btn{
     margin-left: 5px;
     text-decoration: none;
+}
+.navigation>a{
+    text-decoration: none;
+    color: var(--color-primary);
 }
 .btn-primary, .btn-primary:hover{
     background-color: var(--color-primary);
@@ -115,15 +103,6 @@ a.btn{
     margin-right: 10px;
 }
 
-/* #task_section{
-    margin: auto;
-    padding-top: 20px;
-}
-#task_section>h1{
-    text-align: center;
-    margin-bottom: 20px;
-} */
-
 .inputArea{
     display: block;
     margin: 10px 0 20px 0;
@@ -150,6 +129,7 @@ input[type="date"]{
     font-size: 11px;
     width: 90px;
     height: 30px;
+    text-align: center;
 }
 .inputArea>textarea{
     height: 120px;

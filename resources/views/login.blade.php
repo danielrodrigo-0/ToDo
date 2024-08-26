@@ -18,7 +18,7 @@
         <form method="POST" action="{{route('user.login_action')}}">
             @csrf
             <x-form.text_input type="email" name="email" label="E-mail:" placeholder="Digite seu e-mail:" required="required" />
-            <x-form.text_input type="password" name="password" label="Senha (min. 6 caracteres):" placeholder="Digite sua senha" required="required" />
+            <x-form.text_input type="password" name="password" label="Senha:" placeholder="Digite sua senha" required="required" />
 
             <x-form.form_btn resetTxt="Limpar" submitTxt="Entrar" />
 
