@@ -132,10 +132,15 @@
                             x: {
                                 show: false,
                             },
+                            style: {
+                                fontSize: '12px',
+                                fontFamily: "Rubik, Inter, sans-serif",
+                            },
                         },
                         yaxis: {
                             show: false,
                             labels: {
+                                color: '#F6F5FF',
                                 formatter: function(value) {
                                     return value + '%';
                                 }

@@ -131,3 +131,7 @@ input[type="date"]{
     border: 1px solid #ccc;
     padding: 5px 10px;
 }
+.apexcharts-tooltip {
+    background: #f3f3f3;
+    color: #F6F5FF !important;
+}
