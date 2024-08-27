@@ -26,31 +26,31 @@
             document.getElementById('task_filter').value = filter;
         }
     }
-
     // Define o filtro inicial quando a página é carregada
     window.onload = setInitialFilter;
 </script>
 <x-layout>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <x-slot:btn>
-        <a href="{{ route('task.create') }}" class="btn btn-primary">
-            Criar tarefa
-        </a>
-        <a href="{{ route('logout') }}" class="btn btn-primary">
-            Sair
-        </a>
+            <a href="{{ route('task.create') }}" class="btn btn-primary">
+                Criar tarefa
+            </a>
+            <a href="{{ route('logout') }}" class="btn btn-primary">
+                Sair
+            </a>
     </x-slot:btn>
     <section class="graph container-fluid px-3 pt-3 h-100 w-25">
         <div class="graph_header d-flex justify-content-between align-items-center">
             <h2 class="d-inline-block m-0" style="flex: 2; font-size: 18px;"> Progresso do dia </h2>
             <div class="graph_header_line"></div>
             <div class="d-flex justify-content-center align-items-center mb-0" style="flex: 1; font-size: 10px;">
-                <a href="{{ route('home', ['date' => $date_prev_button]) }}">
+                <a href="{{ !empty($date_next_button) ? route('home', ['date' => $date_prev_button]) : route('home') }}">
                     <img src="assets/images/icon-prev.png" alt="icon-prev" />
                 </a>
-                <x-form.text_input id="filterDate" class="m-0" type="date" name="" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" />
-                <a href="{{ route('home', ['date' => $date_next_button]) }}">
+                <x-form.text_input class="m-0" type="date" name="filterDate" onfocus="onfocus=this.showPicker()" value="{{ $date_as_string }}" onchange="filterDate(this)" />
+                <a href="{{ !empty($date_next_button) ? route('home', ['date' => $date_next_button]) : route('home') }}">
                     <img src="assets/images/icon-next.png" alt="icon-next" />
                 </a>
             </div>
@@ -66,7 +66,7 @@
                 const getChartOptions = () => {
                     return {
                         series: [Math.round(todo), Math.round(done)],
-                        colors: ["#6143FF", "#1C64F2"],
+                        colors: ["#1C64F2", "#6143FF"],
                         chart: {
                             height: "430px",
                             width: "100%",
@@ -87,6 +87,7 @@
                                         show: true,
                                     },
                                     value: { //Define o formato e a visibilidade do valor percentual mostrado no centro.
+                                        fontSize: '18px',
                                         formatter: function(val) {
                                             return val + '%';
                                         },
@@ -124,6 +125,7 @@
                             show: true,
                             position: "bottom",
                             fontFamily: "Rubik, Inter, sans-serif",
+                            fontSize: '14px',
                         },
                         tooltip: {
                             enabled: true,
@@ -149,7 +151,12 @@
             </script>
         </div>
         <div class="tasks_left_footer d-flex flex-row align-items-center justify-content-center" style="margin-top: 50px;">
-            <img src="assets/images/icon-info.png" alt="icon-info" />
+            {{-- <img src="assets/images/icon-info.png" alt="icon-info" /> --}}
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6143FF" viewBox="0 0 256 256">
+                <path
+                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z">
+                </path>
+            </svg>
             Restam {{ $undone_tasks_count }} tarefas para serem realizadas
         </div>
     </section>
@@ -161,6 +168,13 @@
                 <option value="task_done"> Tarefas realizadas </option>
             </select>
         </div>
+        @if($tasks->total() != 0) {{-- verifica se possui tasks para então exibir --}}
+            <div class="container d-flex flex-row w-100 mt-3 text-center" style="font-size: 17px;">
+                <div class="col"> Titulo </div>
+                <div class="col"> Categorias </div>
+                <div class="col"></div>
+            </div>
+        @endif
         <div class="d-flex flex-column w-100 mt-3">
             @if ($filter == 'task_pending')
                 @foreach ($tasks_pending as $pending)
@@ -183,57 +197,15 @@
     </section>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            let urlBase = '{{ route('home') }}/?date=';
-            let typingTimer;
-            let doneTypingInterval = 4000;
+            async function filterDate(e) {
+                let url = '{{ route('home') }}';
+                let dateSet = e.value;
 
-            function isValidDate(dateString) {
-                // Verifica se a string está no formato yyyy-mm-dd e se é uma data válida
-                const regex = /^\d{4}-\d{2}-\d{2}$/;
-                if (!regex.test(dateString)) return false;
-
-                const date = new Date(dateString);
-                return date instanceof Date && !isNaN(date);
-            }
-
-            function redirectToDate(dateSet) {
-                if (dateSet && isValidDate(dateSet) && !document.target) {
-                    let url = urlBase + encodeURIComponent(dateSet);
-                    window.location.href = url; // Redireciona para a nova URL com a data
-                } else {
-                    window.location.href = '{{ route('home') }}'; // Redireciona para a URL padrão se a data não for válida
+                if (dateSet != "") {
+                    url = '{{ route('home') }}/?date=' + dateSet;
                 }
+                document.location.href = url;
             }
-
-            function doneTyping() {
-                redirectToDate(filterDate.value);
-            }
-
-            filterDate.addEventListener("keydown", function(e) {
-                if (e.keyCode === 13) {
-                    document.activeElement.blur();
-                    e.preventDefault(); // Previne o comportamento padrão do Enter
-                    doneTyping();
-                }
-            });
-
-            filterDate.addEventListener("focusout", function() {
-                clearTimeout(typingTimer);
-                if (filterDate.value) {
-                    doneTyping();
-                }
-            });
-
-            // async function filterDate(e) {
-            //     let dateSet = e.value;
-
-            //     if (dateSet != "") {
-            //         url = '{{ route('home') }}/?date=' + dateSet;
-            //     }
-            //     document.location.href = url;
-            // }
-        });
     </script>
     <script>
         async function taskUpdate(element) {

@@ -3,6 +3,8 @@
     --background-white: #F6F5FF;
     --text-dark: #0a0040;
     --color-primary: #6143FF;
+    /* color: #6e000b */
+    /* color:#b68800 */
 }
 
 *{
@@ -19,7 +21,7 @@
 }
 
 .btn, .btn:hover{
-    padding: 20px 30px;
+    padding: 10px 20px;
     border-radius: 10px;
     transition: all .3s ease-in-out;
     border: 0;
@@ -30,7 +32,7 @@
     transform: scale(1.05);
 }
 a.btn{
-    margin-left: 5px;
+    margin-left: 3px;
     text-decoration: none;
 }
 .navigation>a{
@@ -47,11 +49,6 @@ a.btn{
     height: 2px;
     background-color: rgba(0, 0, 0, .2);
 }
-
-/* .graph_header-date{
-    font-size: 10px;
-    flex: 1;
-} */
 
 .list_header-select{
     font-size: 18px;
@@ -82,12 +79,7 @@ a.btn{
     padding-left: 10px;
     font-weight: bold;
 }
-.priority, .actions{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex: 1;
-}
+
 .actions a{
     margin-left: 20px;
     margin-right: 10px;
@@ -139,11 +131,3 @@ input[type="date"]{
     border: 1px solid #ccc;
     padding: 5px 10px;
 }
-/*
-.user{
-    justify-self: left !important;
-} */
-/* .content{
-    background-color: #f7f7f7
-} */
-

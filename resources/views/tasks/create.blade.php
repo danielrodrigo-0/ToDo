@@ -1,4 +1,4 @@
-<x-layout page="Todo Login">
+<x-layout page="Criar tarefa">
     <x-slot:btn>
         <a href="{{route('home')}}" class="btn btn-primary">
             Voltar
@@ -18,7 +18,7 @@
             </x-form.select_input>
             <x-form.textarea_input name="description" placeholder="Digite a descrição da tarefa" label="Descrição da tarefa" />
 
-            <x-form.form_btn resetTxt="Resetar" submitTxt="Criar tarefa" />
+            <x-form.form_btn resetTxt="Limpar" submitTxt="Criar tarefa" />
 
         </form>
     </section>

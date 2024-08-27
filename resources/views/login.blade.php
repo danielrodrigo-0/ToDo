@@ -1,4 +1,4 @@
-<x-layout page="Todo Login">
+<x-layout page="Login">
     <x-slot:btn>
         <a href="{{route('register')}}" class="btn btn-primary">
             Registre-se
@@ -18,7 +18,7 @@
         <form method="POST" action="{{route('user.login_action')}}">
             @csrf
             <x-form.text_input type="email" name="email" label="E-mail:" placeholder="Digite seu e-mail:" required="required" />
-            <x-form.text_input type="password" name="password" label="Senha:" placeholder="Digite sua senha" required="required" />
+            <x-form.text_input type="password" name="password" label="Senha:" placeholder="Digite sua senha" required="required" minlength="6" />
 
             <x-form.form_btn resetTxt="Limpar" submitTxt="Entrar" />
 

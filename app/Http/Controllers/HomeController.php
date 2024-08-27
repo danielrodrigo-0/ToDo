@@ -58,8 +58,6 @@ class HomeController extends Controller
             }
         }
 
-        $data['AuthUser'] = Auth::user();
-
         return view('home', $data);
     }
 }

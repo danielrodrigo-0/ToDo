@@ -1,4 +1,4 @@
-<x-layout page="Todo Edit">
+<x-layout page="Editar tarefa">
     <x-slot:btn>
         <a href="{{route('home')}}" class="btn btn-primary">
             Voltar
@@ -24,7 +24,7 @@
             </x-form.select_input>
             <x-form.textarea_input name="description" placeholder="Digite a descrição da tarefa" label="Descrição da tarefa" value="{{$task->description}}"/>
 
-            <x-form.form_btn resetTxt="Resetar" submitTxt="Atualizar tarefa" />
+            <x-form.form_btn resetTxt="Limpar" submitTxt="Atualizar tarefa" />
 
         </form>
     </section>

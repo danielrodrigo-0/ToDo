@@ -21,8 +21,15 @@
             <img src="/assets/images/logo.png" alt="Logo" class="mw-100"/>
         </div>
         <div class="content">
-            <nav class="d-flex align-items-center justify-content-end" style="height: 100px; width: calc(100vw - 100px); background-color: var(--background-light); padding-right: 20px;">
-                {{$btn ?? null}}
+            <nav class="d-flex flex-row align-items-center justify-content-end" style="height: 100px; width: calc(100vw - 100px); background-color: var(--background-light); padding-right: 10px;">
+                <div class="col-8 ps-2">
+                    @if(!empty(Auth::user()))
+                        <b>Bem vindo</b>: {{Auth::user()->name}}
+                    @endif
+                </div>
+                <div class="col-4 d-flex justify-content-end h-50" style="align-items: center;">
+                    {{$btn ?? null}}
+                </div>
             </nav>
             <main class="d-flex p-0">
                 {{$slot}}
