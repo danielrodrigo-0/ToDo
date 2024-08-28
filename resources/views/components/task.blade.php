@@ -26,7 +26,8 @@
                 </path>
             </svg>
         </a>
-        <a href="{{route('task.delete', ['id' => $data['id']])}}"> {{-- botao excluir --}}
+        {{-- <a href="{{route('task.delete', ['id' => $data['id']])}}"> botao excluir --}}
+            <a data-bs-toggle="modal" data-bs-target="#modalTeste" style="cursor: pointer;" data-bs-id={{$data['id']}}>
             {{-- <img src="assets/images/icon-delete.png" alt="icon-delete"/> --}}
             <svg xmlns="http://www.w3.org/2000/svg" width="31" height="31" fill="#6e000b" viewBox="0 0 256 256">
                 <path

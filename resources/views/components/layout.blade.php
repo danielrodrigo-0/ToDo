@@ -3,8 +3,8 @@
 <head>
     <link href="{{ asset('bootstrap/dist/css/bootstrap.css') }}" rel="stylesheet"></link>
     <link href="{{ asset('bootstrap/dist/css/bootstrap-utilities.css') }}" rel="stylesheet"></link>
-    <link rel="stylesheet" href="/assets/css/style.css"/>
     <script src="{{ asset('bootstrap/dist/js/bootstrap.min.js') }}" defer></script>
+    <link rel="stylesheet" href="/assets/css/style.css"/>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

@@ -22,24 +22,22 @@
         const filter = params.get('filter');
 
         // Define o valor selecionado no <select> com base no parâmetro de filtro
-        if (filter) {
-            document.getElementById('task_filter').value = filter;
+            if (filter) {
+                document.getElementById('task_filter').value = filter;
+            }
         }
-    }
-    // Define o filtro inicial quando a página é carregada
-    window.onload = setInitialFilter;
+        // Define o filtro inicial quando a página é carregada
+        window.onload = setInitialFilter;
 </script>
 <x-layout>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.7.0/dist/cdn.min.js"></script>
+
     <x-slot:btn>
-            <a href="{{ route('task.create') }}" class="btn btn-primary">
-                Criar tarefa
-            </a>
-            <a href="{{ route('logout') }}" class="btn btn-primary">
-                Sair
-            </a>
+        <a href="{{ route('task.create') }}" class="btn btn-primary"> Criar tarefa </a>
+        <a href="{{ route('logout') }}" class="btn btn-primary"> Sair </a>
     </x-slot:btn>
     <section class="graph container-fluid px-3 pt-3 h-100 w-25">
         <div class="graph_header d-flex justify-content-between align-items-center">
@@ -159,7 +157,7 @@
             {{-- <img src="assets/images/icon-info.png" alt="icon-info" /> --}}
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#6143FF" viewBox="0 0 256 256">
                 <path
-                d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z">
+                    d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm16-40a8,8,0,0,1-8,8,16,16,0,0,1-16-16V128a8,8,0,0,1,0-16,16,16,0,0,1,16,16v40A8,8,0,0,1,144,176ZM112,84a12,12,0,1,1,12,12A12,12,0,0,1,112,84Z">
                 </path>
             </svg>
             Restam {{ $undone_tasks_count }} tarefas para serem realizadas
@@ -173,7 +171,8 @@
                 <option value="task_done"> Tarefas realizadas </option>
             </select>
         </div>
-        @if($tasks->total() != 0) {{-- verifica se possui tasks para então exibir --}}
+        @if ($tasks->total() != 0)
+            {{-- verifica se possui tasks para então exibir --}}
             <div class="container d-flex flex-row w-100 mt-3 text-center" style="font-size: 17px;">
                 <div class="col"> Titulo </div>
                 <div class="col"> Categorias </div>
@@ -200,17 +199,18 @@
 
         </div>
     </section>
+    <x-modals.modal/>
 
     <script>
-            async function filterDate(e) {
-                let url = '{{ route('home') }}';
-                let dateSet = e.value;
+        async function filterDate(e) {
+            let url = '{{ route('home') }}';
+            let dateSet = e.value;
 
-                if (dateSet != "") {
-                    url = '{{ route('home') }}/?date=' + dateSet;
-                }
-                document.location.href = url;
+            if (dateSet != "") {
+                url = '{{ route('home') }}/?date=' + dateSet;
             }
+            document.location.href = url;
+        }
     </script>
     <script>
         async function taskUpdate(element) {
