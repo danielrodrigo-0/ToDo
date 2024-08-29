@@ -22,12 +22,12 @@
         const filter = params.get('filter');
 
         // Define o valor selecionado no <select> com base no parâmetro de filtro
-            if (filter) {
-                document.getElementById('task_filter').value = filter;
-            }
+        if (filter) {
+            document.getElementById('task_filter').value = filter;
         }
-        // Define o filtro inicial quando a página é carregada
-        window.onload = setInitialFilter;
+    }
+    // Define o filtro inicial quando a página é carregada
+    window.onload = setInitialFilter;
 </script>
 <x-layout>
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
@@ -198,10 +198,50 @@
             @endif
 
         </div>
+        <x-modals.modal />
     </section>
-    <x-modals.modal/>
-
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let taskView = document.querySelectorAll('.task');
+            let deleteButtons = document.querySelectorAll('.delete-task');
+
+            let taskModalId = document.querySelector('#taskModalId');
+            let taskModalDate = document.querySelector('#taskModalDate');
+            let taskModalTitle = document.querySelector('#taskModalTitle');
+            let deleteModalTitle = document.querySelector('#deleteModalTitle');
+            let taskModalCategory = document.querySelector('#taskModalCategory');
+            let taskModalDescription = document.querySelector('#taskModalDescription');
+
+            let confirmDelete = document.querySelector('#confirmDelete');
+
+
+            taskView.forEach(function(task) {
+                task.addEventListener('click', function() {
+                    let taskDate = this.getAttribute('data-task-date');
+                    let taskTitle = this.getAttribute('data-task-title');
+                    let taskCategory = this.getAttribute('data-task-category');
+                    let taskDescription = this.getAttribute('data-task-description');
+
+                    taskModalDate.textContent = taskDate;
+                    taskModalTitle.textContent = taskTitle;
+                    taskModalCategory.textContent = taskCategory;
+                    taskModalDescription.textContent = taskDescription;
+                });
+            });
+
+            deleteButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    let taskId = this.getAttribute('data-taskId');
+                    let taskTitle = this.getAttribute('data-title');
+
+                    deleteModalTitle.textContent = taskTitle;
+                    confirmDelete.href = '{{ route('task.delete') }}/?id=' + taskId;
+                });
+            });
+        });
+    </script>
+    <script>
+        //filtro da data
         async function filterDate(e) {
             let url = '{{ route('home') }}';
             let dateSet = e.value;
