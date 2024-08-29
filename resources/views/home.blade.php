@@ -202,7 +202,7 @@
     </section>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let taskView = document.querySelectorAll('.task');
+            let taskView = document.querySelectorAll('.task-view');
             let deleteButtons = document.querySelectorAll('.delete-task');
 
             let taskModalId = document.querySelector('#taskModalId');

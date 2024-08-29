@@ -60,7 +60,7 @@ a.btn{
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 30px 15px;
+    /* padding: 30px 15px; */
     margin-bottom: 10px;
     border-bottom: 1px solid var(--background-light);
     transition: all .3s ease-in-out;
@@ -73,7 +73,7 @@ a.btn{
 .title{
     display: flex;
     align-items: center;
-    flex: 1;
+    /* flex: 1; */
 }
 .task_title{
     padding-left: 10px;
